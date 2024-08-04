@@ -1,7 +1,7 @@
 {
     "format_version": 2,
     "tooth": "github.com/cngege/LL3_AutoFishing",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "info": {
         "name": "AutoFishing",
         "description": "LL3 自动钓鱼",
