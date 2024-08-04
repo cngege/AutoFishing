@@ -11,7 +11,7 @@ if not has_config("vs_runtime") then
     set_runtimes("MD")
 end
 
-target("my-mod") -- Change this to your mod name.
+target("AutoFishing") -- Change this to your mod name.
     add_cxflags(
         "/EHa",
         "/utf-8",
@@ -40,7 +40,7 @@ target("my-mod") -- Change this to your mod name.
         local major, minor, patch, suffix = tag:match("v(%d+)%.(%d+)%.(%d+)(.*)")
         if not major then
             print("Failed to parse version tag, using 0.0.0")
-            major, minor, patch = 0, 0, 0
+            major, minor, patch = 0, 0, 1
         end
         local mod_define = {
             modName = target:name(),

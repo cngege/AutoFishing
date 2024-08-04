@@ -1,8 +1,11 @@
-#include "mod/MyMod.h"
+﻿#include "mod/MyMod.h"
 
 #include <memory>
 
 #include "ll/api/mod/RegisterHelper.h"
+#include <ll/api/memory/Memory.h>
+
+bool findFishinghook_offset();
 
 namespace my_mod {
 
@@ -11,20 +14,20 @@ static std::unique_ptr<MyMod> instance;
 MyMod& MyMod::getInstance() { return *instance; }
 
 bool MyMod::load() {
-    getSelf().getLogger().info("Loading...");
+    if (!findFishinghook_offset()) {
+        my_mod::MyMod::getInstance().getSelf().getLogger().warn("没能找到关键偏移,插件自动停用,请反馈给开发者并等待更新");
+        my_mod::MyMod::getInstance().getSelf().getLogger().warn("https://github.com/cngege/LL3_AutoFishing");
+    }
+
     // Code for loading the plugin goes here.
     return true;
 }
 
 bool MyMod::enable() {
-    getSelf().getLogger().info("Enabling...");
-    // Code for enabling the plugin goes here.
     return true;
 }
 
 bool MyMod::disable() {
-    getSelf().getLogger().info("Disabling...");
-    // Code for disabling the plugin goes here.
     return true;
 }
 
