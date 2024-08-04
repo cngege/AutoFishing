@@ -18,8 +18,8 @@
     "files": {
         "place": [
             {
-                "src": "LL3_AutoFishing/*",
-                "dest": "plugins/LL3_AutoFishing/"
+                "src": "AutoFishing/*",
+                "dest": "plugins/AutoFishing/"
             }
         ]
     }
