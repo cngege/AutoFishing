@@ -1,10 +1,10 @@
 {
     "format_version": 2,
-    "tooth": "github.com/cngege/LL3_AutoFishing",
-    "version": "0.0.4",
+    "tooth": "github.com/cngege/AutoFishing",
+    "version": "0.0.5",
     "info": {
         "name": "AutoFishing",
-        "description": "LL3 自动钓鱼",
+        "description": "LL3自动钓鱼Mod",
         "author": "CNGEGE",
         "tags": [
             "levilamina",
