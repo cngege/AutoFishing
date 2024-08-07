@@ -64,17 +64,16 @@ int GetHookedTime(FishingHook* fishingHook) {
 }
 
 LL_AUTO_TYPE_INSTANCE_HOOK(
-    FishingHook2,
+    Fishing_hitCheckHook,
     ll::memory::HookPriority::Normal,
     FishingHook,
     "?_hitCheck@FishingHook@@IEAA?AVHitResult@@XZ",
-    void*,
-    void* a1
+    void*
 ) {
     // my_mod::MyMod::getInstance().getSelf().getLogger().info("A OK");
     //my_mod::MyMod::getInstance().getSelf().getLogger().info("A OK:{},time: {}", (void*)this, GetHookedTime(this));
     //return origin(a1);
-    auto ret        = origin(a1);
+    auto ret        = origin();
     int  HookedTime = GetHookedTime(this);
     //printf_s("0x%llX", (void*)thi);
     if (fishinghook_offset > 0 && HookedTime > 0) {
@@ -98,15 +97,14 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
 }
 
 LL_AUTO_TYPE_INSTANCE_HOOK(
-    PlayerHook,
+    PlayertickWorldHook,
     ll::memory::HookPriority::Normal,
     Player,
     "?tickWorld@Player@@UEAAXAEBUTick@@@Z",
-    void,
-    void* tick
+    void
 ) {
     if (fishinghook_offset <= 0) {
-        return origin(tick);
+        return origin();
     }
     if (tickcount < 20) {
         tickcount++;
@@ -121,5 +119,5 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
         }
         tickcount = 0;
     }
-    origin(tick);
+    origin();
 }
