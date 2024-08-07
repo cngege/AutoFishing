@@ -1,7 +1,7 @@
 {
     "format_version": 2,
     "tooth": "github.com/cngege/LL3_AutoFishing",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "info": {
         "name": "AutoFishing",
         "description": "LL3 自动钓鱼",
@@ -11,7 +11,7 @@
             "mod"
         ]
     },
-    "asset_url": "https://github.com/cngege/LL3_AutoFishing/releases/download/v$(version)/LL3_AutoFishing-windows-x64.zip",
+    "asset_url": "https://github.com/cngege/AutoFishing/releases/download/v$(version)/AutoFishing-windows-x64.zip",
     "prerequisites": {
         "github.com/LiteLDev/LeviLamina": "0.13.x"
     },
