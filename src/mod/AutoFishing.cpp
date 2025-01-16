@@ -14,18 +14,21 @@
 #include <ll/api/mod/NativeMod.h>
 #include <ll/api/mod/ModManagerRegistry.h>
 #include <ll/api/service/Bedrock.h>
-#include <mc/entity/utilities/ActorType.h>
+#include <mc/world/actor/ActorType.h>
 #include <mc/server/commands/CommandOrigin.h>
 #include <mc/server/commands/CommandOutput.h>
 #include <mc/server/commands/CommandPermissionLevel.h>
 #include <mc/world/actor/player/Player.h>
-#include <mc/world/item/registry/ItemStack.h>
+#include <mc/world/item/ItemStack.h>
 #include <mc/world/actor/FishingHook.h>
+#include <mc/world/phys/HitResult.h>
+#include <mc/world/level/Tick.h>
 #include <memory>
 #include <stdexcept>
 #include "MyMod.h"
 
 #include "ll/api/memory/Hook.h"
+#include "ll/api/memory/Symbol.h"
 
 int fishinghook_offset = -1;
 
@@ -33,7 +36,7 @@ int tickcount = 0;
 std::unordered_map<Player*, bool> playerhash;
 
 bool findFishinghook_offset() {
-    auto updateServer = (ll::memory::symbolCache<"?_updateServer@FishingHook@@IEAAXXZ">);
+    auto updateServer= (ll::memory::resolveIdentifier(&FishingHook::_updateServer));
     // 往后寻找 能判断鱼是否上钩的偏移
     for (int i = 0; i < 200; i++) {
         if (*reinterpret_cast<std::byte*>((intptr_t)updateServer + i) == (std::byte)0x89
@@ -67,8 +70,8 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
     Fishing_hitCheckHook,
     ll::memory::HookPriority::Normal,
     FishingHook,
-    "?_hitCheck@FishingHook@@IEAA?AVHitResult@@XZ",
-    void*
+    &FishingHook::_hitCheck,
+    HitResult
 ) {
     // my_mod::MyMod::getInstance().getSelf().getLogger().info("A OK");
     //my_mod::MyMod::getInstance().getSelf().getLogger().info("A OK:{},time: {}", (void*)this, GetHookedTime(this));
@@ -100,11 +103,12 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
     PlayertickWorldHook,
     ll::memory::HookPriority::Normal,
     Player,
-    "?tickWorld@Player@@UEAAXAEBUTick@@@Z",
-    void
+    &Player::$tickWorld,
+    void,
+    Tick const& tick
 ) {
     if (fishinghook_offset <= 0) {
-        return origin();
+        return origin(tick);
     }
     if (tickcount < 20) {
         tickcount++;
@@ -119,5 +123,5 @@ LL_AUTO_TYPE_INSTANCE_HOOK(
         }
         tickcount = 0;
     }
-    origin();
+    origin(tick);
 }
