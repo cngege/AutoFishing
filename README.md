@@ -1,22 +1,23 @@
-# LeviLamina Mod Template
+# AutoFishing
+![GitHub Release](https://img.shields.io/github/v/release/cngege/AutoFishing)
 
-A LeviLamina mod template
+A LeviLamina mod for fishing guy!
 
-This mod is a template for developing LeviLamina mods.
+## Install and Update
+**Using lip**
+```Bash
+lip install github.com/cngege/AutoFishing
+```
+Update:
+```Bash
+lip install --upgrade github.com/cngege/AutoFishing
+```
 
-## Install
+## Build
 
-Generate a new repository from this template.
+Before build, make sure that you have installed XMake and a Minecraft Bedrock Server with LeviLamina.
 
-## Usage
-
-Before using this mod template, make sure that you have installed XMake and a Minecraft Bedrock Server with LeviLamina.
-
-1. Clone the new repository into a local folder.
-
-1. Change the mod name and the expected LeviLamina version in `xmake.lua`.
-
-1. Add your code.
+1. Clone the repository into a local folder.
 
 1. Run `xmake repo -u` in the root of the repository.
 
@@ -32,4 +33,4 @@ PRs accepted.
 
 ## License
 
-CC0-1.0 © LiteLDev
+CC0-1.0 © cngege

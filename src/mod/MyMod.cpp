@@ -9,9 +9,10 @@ bool findFishinghook_offset();
 
 namespace my_mod {
 
-static std::unique_ptr<MyMod> instance;
-
-MyMod& MyMod::getInstance() { return *instance; }
+MyMod& MyMod::getInstance() {
+    static MyMod instance;
+    return instance;
+}
 
 bool MyMod::load() {
     if (!findFishinghook_offset()) {
@@ -33,4 +34,4 @@ bool MyMod::disable() {
 
 } // namespace my_mod
 
-LL_REGISTER_MOD(my_mod::MyMod, my_mod::instance);
+LL_REGISTER_MOD(my_mod::MyMod, my_mod::MyMod::getInstance());
